@@ -1,5 +1,10 @@
 {
   "name": "dashboard",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./dashboard.js"
+  },
   "description": "The Dashboard for the eBPM project",
   "dependencies": {
     "express": "^4.13.3",
