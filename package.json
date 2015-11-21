@@ -7,6 +7,6 @@
   },
   "description": "The Dashboard for the eBPM project",
   "dependencies": {
-    "node-static": "^0.7.7",
+    "node-static": "^0.7.7"
   }
 }
