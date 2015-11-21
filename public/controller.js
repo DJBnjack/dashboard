@@ -1,7 +1,7 @@
 var processApp = angular.module('processApp', []);
 
 processApp.factory('socket', ['$rootScope', function ($rootScope) {
-    var socket = io.connect();
+    var socket = io.connect('http://socketserver.core.djbnjack.svc.tutum.io:3210/processes');
  
     return {
         on: function (eventName, callback) {
@@ -40,4 +40,5 @@ processApp.controller('ProcessListCtrl', function ($scope, $http, socket) {
     }
     
     socket.on('processes', updateProcesses);
+    socket.on('system', msg => console.log(msg))
 });
