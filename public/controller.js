@@ -1,22 +1,12 @@
 var processApp = angular.module('processApp', []);
 
-processApp.controller('ProcessListCtrl', function ($scope) {
-  $scope.processes = [
-    {
-		'name': 'First process',
-     	'description': 'Oh yeah',
-		'id': 1,
-		'stepCount': 10
-	}, {
-		'name': 'Second process',
-     	'description': 'Oh yeah',
-		'id': 2,
-		'stepCount': 20
-	}, {
-		'name': 'Third process',
-     	'description': 'Oh yeah',
-		'id': 3,
-		'stepCount': 15
-	}
-  ];
+processApp.controller('ProcessListCtrl', function ($scope, $http) {
+	$scope.processes = [];
+	var url = "http://processes-api.core.djbnjack.svc.tutum.io:3000/processes";
+	// var url = "http://localhost:3000/processes";
+	$http.get(url)
+		.then(
+			response => $scope.processes = response.data.map(element => element.row[0]), 
+			error => console.log(error)
+		);
 });
