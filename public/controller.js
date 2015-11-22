@@ -1,8 +1,8 @@
 var processApp = angular.module('processApp', []);
 
 processApp.factory('socket', ['$rootScope', function ($rootScope) {
-    var socket = io.connect('http://socketserver.messaging.djbnjack.svc.tutum.io:3210/processes');
-    // var socket = io.connect('http://localhost:3210/processes');
+    // var socket = io.connect('http://socketserver.messaging.djbnjack.svc.tutum.io:3210/processes');
+    var socket = io.connect('http://localhost:3210/processes');
  
     return {
         on: function (eventName, callback) {
@@ -46,6 +46,28 @@ processApp.controller('ProcessListCtrl', function ($scope, $http, socket) {
         }, function errorCallback(response) {
             console.log('Error:', response);
         });    
+    }
+    
+    $scope.deleteProcess = function(guid) {
+        $http({
+            method: 'DELETE',
+            url: processes_api_url + '/' + guid
+        }).then(function successCallback(response) {
+            console.log('Process with guid ' + guid + ' removed.');                
+        }, function errorCallback(response) {
+            console.log('Error:', response);
+        });
+    }
+    
+    $scope.createProcess = function() {
+        $http({
+            method: 'POST',
+            url: processes_api_url
+        }).then(function successCallback(response) {
+            console.log('New process created.');                
+        }, function errorCallback(response) {
+            console.log('Error:', response);
+        });
     }
     
     var setUrl = function(url) {

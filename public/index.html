@@ -8,10 +8,12 @@
     <script src="controller.js"></script>
   </head>
   <body ng-controller="ProcessListCtrl">
+    <button ng-click="createProcess()">New</button>
     <ul>
-      <li ng-repeat="process in processes">
+      <li ng-repeat="process in processes track by process.guid">
         <span>{{process.name}}</span>
         <pre>{{process.guid}}</pre>
+        <button ng-click="deleteProcess(process.guid)">Delete</button>
       </li>
     </ul>
   </body>
