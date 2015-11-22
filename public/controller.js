@@ -34,11 +34,23 @@ processApp.factory('socket', ['$rootScope', function ($rootScope) {
 
 processApp.controller('ProcessListCtrl', function ($scope, $http, socket) {
 	$scope.processes = [];
+    var processes_api_url = "";
     
-    var updateProcesses = function(data) {
-        $scope.processes = JSON.parse(data).map(element => element.row[0]);
+    var updateProcesses = function() {
+        $http({
+            method: 'GET',
+            url: processes_api_url
+        }).then(function successCallback(response) {
+            if(response.statusCode !== 200){
+                console.log('Invalid Status Code Returned:', response.statusCode);
+            } else {
+                $scope.processes = response.body;                
+            }
+        }, function errorCallback(response) {
+            console.log('Error:', response);
+        });    
     }
-    
-    socket.on('processes', updateProcesses);
-    socket.on('system', msg => console.log(msg))
+
+    socket.on('url', url => processes_api_url = url);
+    socket.on('updated', updateProcesses);
 });
