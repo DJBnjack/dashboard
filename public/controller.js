@@ -1,7 +1,8 @@
 var processApp = angular.module('processApp', []);
 
 processApp.factory('socket', ['$rootScope', function ($rootScope) {
-    var socket = io.connect('http://socketserver.messaging.djbnjack.svc.tutum.io:3210/processes');
+    // var socket = io.connect('http://socketserver.messaging.djbnjack.svc.tutum.io:3210/processes');
+    var socket = io.connect('http://localhost:3210/processes');
  
     return {
         on: function (eventName, callback) {
@@ -41,16 +42,18 @@ processApp.controller('ProcessListCtrl', function ($scope, $http, socket) {
             method: 'GET',
             url: processes_api_url
         }).then(function successCallback(response) {
-            if(response.statusCode !== 200){
-                console.log('Invalid Status Code Returned:', response.statusCode);
-            } else {
-                $scope.processes = response.body;                
-            }
+            $scope.processes = response.data.map(element => element.row[0]);                
         }, function errorCallback(response) {
             console.log('Error:', response);
         });    
     }
+    
+    var setUrl = function(url) {
+        processes_api_url = url;
+        updateProcesses();        
+    }
 
-    socket.on('url', url => processes_api_url = url);
+    socket.on('url', setUrl);
     socket.on('updated', updateProcesses);
+    socket.on('error', exception => console.log(exception));
 });
