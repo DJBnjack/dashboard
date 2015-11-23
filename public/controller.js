@@ -1,7 +1,7 @@
 var processApp = angular.module('processApp', []);
 
 processApp.factory('socket', ['$rootScope', function ($rootScope) {
-    var socket = io.connect('http://socketserver.messaging.djbnjack.svc.tutum.io:3210/processes');
+    var socket = io.connect('http://socketserver-1.messaging.djbnjack.cont.tutum.io:3210/processes');
     // var socket = io.connect('http://localhost:3210/processes');
  
     return {
