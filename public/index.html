@@ -1,20 +1,91 @@
 <!doctype html>
 <html ng-app="processApp">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Socket.IO, Node, Redis & Angular</title>
+    
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    
+    <!-- Angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular.min.js"></script>
+
+    <!-- Socket.io -->    
     <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
+    
+    <!-- own script -->
     <script src="controller.js"></script>
+    
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
   </head>
   <body ng-controller="ProcessListCtrl">
-    <button ng-click="createProcess()">New</button>
-    <ul>
-      <li ng-repeat="process in processes track by process.guid">
-        <span>{{process.name}}</span>
-        <pre>{{process.guid}}</pre>
-        <button ng-click="deleteProcess(process.guid)">Delete</button>
-      </li>
-    </ul>
+    <div class="container">
+
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Project name</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+
+      <div class="jumbotron">
+        <h1>Dashboard</h1>
+        <h2>Create process</h2>
+        <form class="form-inline" role="form">
+        <div class="form-group">
+          <label for="process-name">Name:</label>
+          <input type="text" class="form-control" id="process-name" ng-model="newprocess.name">
+        </div>
+        <button ng-click="createProcess()">Create</button>
+        </form>
+        
+        <h2>Running processes</h2>
+        <table class="table table-hover table-condensed"  ng-if="processes.length > 0">
+          <tr>
+            <th>Operations</th>
+            <th>Name</th>
+            <th>State</th>
+            <th>Guid</th>
+          </tr>
+          <tr ng-repeat="process in processes track by process.guid">
+            <td>
+              <button ng-show="process.state == 'new'" ng-click="updateProcess(process.guid)">Update</button>
+              <button ng-click="deleteProcess(process.guid)">Delete</button>
+            </td>
+            <td>{{process.name}}</td>
+            <td>{{process.state}}</td>
+            <td>{{process.guid}}</td>
+          </tr>
+        </table>
+        <p ng-if="processes.length == 0">No running processes</p>
+
+      </div>
+
+    </div><!-- /.container -->
+    
+
   </body>
 </html>

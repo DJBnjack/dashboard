@@ -59,10 +59,23 @@ processApp.controller('ProcessListCtrl', function ($scope, $http, socket) {
         });
     }
     
+    $scope.updateProcess = function(guid) {
+        $http({
+            method: 'PUT',
+            url: processes_api_url + '/' + guid
+        }).then(function successCallback(response) {
+            console.log('Process with guid ' + guid + ' updated.');                
+        }, function errorCallback(response) {
+            console.log('Error:', response);
+        });
+    }
+        
     $scope.createProcess = function() {
+        console.log($scope.newprocess.name);
         $http({
             method: 'POST',
-            url: processes_api_url
+            url: processes_api_url,
+            data: { name: $scope.newprocess.name }
         }).then(function successCallback(response) {
             console.log('New process created.');                
         }, function errorCallback(response) {
