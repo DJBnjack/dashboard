@@ -17,7 +17,7 @@
     <!-- Socket.io -->    
     <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
     
-    <!-- own script -->
+    <!-- my script -->
     <script src="controller.js"></script>
     
     <!-- Bootstrap -->
@@ -53,36 +53,59 @@
 
       <div class="jumbotron">
         <h1>Dashboard</h1>
-        <h2>Create process</h2>
-        <form class="form-inline" role="form">
-        <div class="form-group">
-          <label for="process-name">Name:</label>
-          <input type="text" class="form-control" id="process-name" ng-model="newprocess.name">
-        </div>
-        <button ng-click="createProcess()">Create</button>
-        </form>
-        
-        <h2>Running processes</h2>
-        <table class="table table-hover table-condensed"  ng-if="processes.length > 0">
-          <tr>
-            <th>Operations</th>
-            <th>Name</th>
-            <th>State</th>
-            <th>Guid</th>
-          </tr>
-          <tr ng-repeat="process in processes track by process.guid">
-            <td>
-              <button ng-show="process.state == 'new'" ng-click="updateProcess(process.guid)">Update</button>
-              <button ng-click="deleteProcess(process.guid)">Delete</button>
-            </td>
-            <td>{{process.name}}</td>
-            <td>{{process.state}}</td>
-            <td>{{process.guid}}</td>
-          </tr>
-        </table>
-        <p ng-if="processes.length == 0">No running processes</p>
-
       </div>
+      
+      <div class="panel panel-default">
+        <div class="panel-heading">Create process</div>
+        <div class="panel-body">
+          <form class="form-inline" role="form">
+          <div class="form-group">
+            <label for="process-name">Name:</label>
+            <input type="text" class="form-control" id="process-name" ng-model="newprocess.name">
+          </div>
+          <button ng-click="createProcess()">Create</button>
+          </form>
+        </div> <!-- /panel-body -->
+      </div> <!-- /panel -->
+        
+
+<div class="row">
+      <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Running processes</div>
+        <div class="panel-body">
+          <table class="table table-hover table-condensed"  ng-if="processes.length > 0">
+            <tr>
+              <th>Name</th>
+              <th>State</th>
+              <th>Guid</th>
+            </tr>
+            <tr ng-repeat="process in processes track by process.guid" ng-click="showProcess($index)" style="cursor: pointer">
+              <td>{{process.name}}</td>
+              <td>{{process.state}}</td>
+              <td style="font-family:monospace;">{{process.guid}}</td>
+            </tr>
+          </table>
+          <p ng-if="processes.length == 0">No running processes</p>
+        </div> <!-- /panel-body -->
+      </div> <!-- /panel -->
+      </div> <!-- /col -->
+
+      <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Process: {{selectedProcess == undefined ? "None selected" : processes[selectedProcess].name}}</div>
+        <div class="panel-body" ng-if="selectedProcess != undefined">
+          <p>{{processes[selectedProcess]}}</p>
+          
+          <div class="btn-group" role="group" aria-label="...">
+            <button type="button" ng-show="processes[selectedProcess].state == 'new'" ng-click="updateProcess(processes[selectedProcess].guid)" class="btn btn-default">Finish</button>
+            <button type="button" ng-click="deleteProcess(processes[selectedProcess].guid)" class="btn btn-default">Delete</button>
+          </div>
+        </div> <!-- /panel-body -->
+      </div> <!-- /panel -->
+      </div> <!-- /col -->
+
+</div> <!-- /row -->
 
     </div><!-- /.container -->
     

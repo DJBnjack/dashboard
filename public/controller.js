@@ -35,6 +35,7 @@ processApp.factory('socket', ['$rootScope', function ($rootScope) {
 
 processApp.controller('ProcessListCtrl', function ($scope, $http, socket) {
 	$scope.processes = [];
+    $scope.selectedProcess = undefined;
     var processes_api_url = "";
     
     var updateProcesses = function() {
@@ -71,16 +72,24 @@ processApp.controller('ProcessListCtrl', function ($scope, $http, socket) {
     }
         
     $scope.createProcess = function() {
-        console.log($scope.newprocess.name);
+        var newName = "New Process";
+        if ($scope.newprocess != undefined) {
+            newName = $scope.newprocess.name 
+        }
+        console.log("Creating process with name: " + newName);
         $http({
             method: 'POST',
             url: processes_api_url,
-            data: { name: $scope.newprocess.name }
+            data: { name: newName }
         }).then(function successCallback(response) {
             console.log('New process created.');                
         }, function errorCallback(response) {
             console.log('Error:', response);
         });
+    }
+    
+    $scope.showProcess = function(index) {
+        $scope.selectedProcess = index;
     }
     
     var setUrl = function(url) {
