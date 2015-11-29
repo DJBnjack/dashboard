@@ -15,8 +15,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular.min.js"></script>
 
     <!-- pretty print -->
-    <script src="ng-prettyjson.min.js"></script>
-    <link rel="stylesheet" href="ng-prettyjson.min.css">
+    <script src="js/ng-prettyjson.min.js"></script>
+    <link rel="stylesheet" href="css/ng-prettyjson.min.css">
 
     <!-- Socket.io -->    
     <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
@@ -28,8 +28,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     
     <!-- my script -->
-    <script src="controller.js"></script>
-    <link rel="stylesheet" href="site.css">
+    <script src="js/controller.js"></script>
+    <link rel="stylesheet" href="css/site.css">
   </head>
   <body ng-controller="ProcessListCtrl" data-spy="scroll" data-target=".navbar" data-offset="100">
     <div class="container">
@@ -162,17 +162,11 @@ Phasellus a risus non mauris aliquet vehicula. Fusce sit amet dolor id nulla pla
       <div class="panel panel-default">
         <div class="panel-heading">Future Work</div>
         <div class="panel-body">
-          <pre>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lobortis ligula nec arcu condimentum, id dignissim sapien facilisis. Aenean porttitor erat a magna placerat, vel accumsan metus consectetur. Ut placerat bibendum facilisis. Cras placerat tortor vel consequat convallis. Morbi vitae odio vitae dolor tristique blandit sit amet et tortor. Duis dui orci, volutpat vel est vel, blandit sagittis urna. Donec pretium fringilla lacus, vitae tincidunt arcu tempor nec. Morbi quis commodo neque, ac convallis odio.
-
-Donec molestie velit metus, vel malesuada mauris mattis in. Duis non libero ac purus luctus feugiat. Cras venenatis non diam a tincidunt. Aliquam laoreet consequat augue id condimentum. Pellentesque rhoncus porta purus ut varius. Sed eget ante nisi. Duis cursus magna in malesuada ullamcorper. Aenean dapibus, risus non finibus posuere, neque enim interdum sem, quis posuere dolor purus id velit. Vestibulum euismod ipsum non arcu consequat, a tempus lacus semper.
-
-Curabitur gravida nulla eros, non varius turpis porta eu. In mi lorem, euismod non dignissim quis, luctus non mauris. Nam placerat accumsan arcu, eget pharetra neque. Fusce feugiat mauris id luctus vehicula. Nulla pellentesque quis felis vel iaculis. Suspendisse potenti. Sed tristique rhoncus imperdiet. Vivamus sed nulla sed nisi sagittis ultrices.
-
-Vestibulum convallis dolor urna. Nunc dignissim lectus id ultricies porttitor. Fusce nec ullamcorper odio, gravida aliquam felis. Aenean et arcu risus. Nulla eleifend nibh quam, ultricies laoreet nisi scelerisque a. Nulla venenatis metus tortor, et rutrum velit malesuada quis. Donec nec nisi eget lectus imperdiet hendrerit. Sed mauris sem, imperdiet ac eros eu, convallis eleifend tortor. Integer ornare nisi nunc, vel interdum nunc ornare a. Praesent nec rutrum dui. Nullam condimentum nibh ac dapibus tempus. Nunc et lacus finibus, congue tellus a, porta nisl. Morbi congue nunc urna, volutpat lacinia lectus rhoncus sed.
-
-Phasellus a risus non mauris aliquet vehicula. Fusce sit amet dolor id nulla placerat suscipit. Phasellus dictum orci eu pretium sodales. Pellentesque a magna nec justo pellentesque sagittis at in orci. Donec ut tellus odio. Nunc augue ipsum, aliquet a sapien vitae, eleifend vestibulum sapien. Mauris sem arcu, sodales nec tellus nec, fermentum finibus arcu. Suspendisse vitae velit iaculis, rhoncus odio id, tristique nibh. Sed tristique scelerisque neque, cursus pellentesque enim vestibulum sed.
-          </pre>
+          <ul>
+            <li>Make graphics for the stats from Tutum</li>
+            <li>Show stats from the processes</li>
+            <li>Create some way to run the experiments</li>
+          </ul>
         </div> <!-- /panel-body -->
       </div> <!-- /panel -->
 
@@ -181,19 +175,20 @@ Phasellus a risus non mauris aliquet vehicula. Fusce sit amet dolor id nulla pla
       </div>
 
       <div class="panel panel-default">
-        <div class="panel-heading">Contact</div>
+        <div class="panel-heading">Contact me</div>
         <div class="panel-body">
-          <pre>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lobortis ligula nec arcu condimentum, id dignissim sapien facilisis. Aenean porttitor erat a magna placerat, vel accumsan metus consectetur. Ut placerat bibendum facilisis. Cras placerat tortor vel consequat convallis. Morbi vitae odio vitae dolor tristique blandit sit amet et tortor. Duis dui orci, volutpat vel est vel, blandit sagittis urna. Donec pretium fringilla lacus, vitae tincidunt arcu tempor nec. Morbi quis commodo neque, ac convallis odio.
-
-Donec molestie velit metus, vel malesuada mauris mattis in. Duis non libero ac purus luctus feugiat. Cras venenatis non diam a tincidunt. Aliquam laoreet consequat augue id condimentum. Pellentesque rhoncus porta purus ut varius. Sed eget ante nisi. Duis cursus magna in malesuada ullamcorper. Aenean dapibus, risus non finibus posuere, neque enim interdum sem, quis posuere dolor purus id velit. Vestibulum euismod ipsum non arcu consequat, a tempus lacus semper.
-
-Curabitur gravida nulla eros, non varius turpis porta eu. In mi lorem, euismod non dignissim quis, luctus non mauris. Nam placerat accumsan arcu, eget pharetra neque. Fusce feugiat mauris id luctus vehicula. Nulla pellentesque quis felis vel iaculis. Suspendisse potenti. Sed tristique rhoncus imperdiet. Vivamus sed nulla sed nisi sagittis ultrices.
-
-Vestibulum convallis dolor urna. Nunc dignissim lectus id ultricies porttitor. Fusce nec ullamcorper odio, gravida aliquam felis. Aenean et arcu risus. Nulla eleifend nibh quam, ultricies laoreet nisi scelerisque a. Nulla venenatis metus tortor, et rutrum velit malesuada quis. Donec nec nisi eget lectus imperdiet hendrerit. Sed mauris sem, imperdiet ac eros eu, convallis eleifend tortor. Integer ornare nisi nunc, vel interdum nunc ornare a. Praesent nec rutrum dui. Nullam condimentum nibh ac dapibus tempus. Nunc et lacus finibus, congue tellus a, porta nisl. Morbi congue nunc urna, volutpat lacinia lectus rhoncus sed.
-
-Phasellus a risus non mauris aliquet vehicula. Fusce sit amet dolor id nulla placerat suscipit. Phasellus dictum orci eu pretium sodales. Pellentesque a magna nec justo pellentesque sagittis at in orci. Donec ut tellus odio. Nunc augue ipsum, aliquet a sapien vitae, eleifend vestibulum sapien. Mauris sem arcu, sodales nec tellus nec, fermentum finibus arcu. Suspendisse vitae velit iaculis, rhoncus odio id, tristique nibh. Sed tristique scelerisque neque, cursus pellentesque enim vestibulum sed.
-          </pre>
+          <form role="form">
+            <div class="form-group">
+              <label for="email">Your email address:</label>
+              <input type="email" class="form-control" id="email">
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox">I am not a robot</label>
+            </div>
+            <label for="message">Your message</label><br />
+            <textarea class="form-text" id="message"></textarea><br />
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form> 	
         </div> <!-- /panel-body -->
       </div> <!-- /panel -->
 
