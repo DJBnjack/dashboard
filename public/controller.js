@@ -19,7 +19,7 @@ $(function () {
 });
 
 
-var processApp = angular.module('processApp', []);
+var processApp = angular.module('processApp', ['ngPrettyJson']);
 
 processApp.factory('socket', ['$rootScope', function ($rootScope) {
     var socket = io.connect('http://socketserver-1.messaging.djbnjack.cont.tutum.io:3210/processes');
@@ -59,6 +59,46 @@ processApp.controller('ProcessListCtrl', function ($scope, $http, socket) {
 	$scope.processes = [];
     $scope.selectedProcess = undefined;
     var processes_api_url = "";
+
+    $scope.tutumServiceInfo = "";
+    $scope.tutumStackInfo = "";
+    $scope.tutumNodeInfo = "";
+    var getTutumInfo = function () {
+        $http({
+            method: 'GET',
+            url: 'https://dashboard.tutum.co/api/v1/service/',
+             headers: {'Authorization': 'ApiKey djbnjack:97c5dae24f965291a3433efa99684113d2fee38f'}
+        }).then(function successCallback(response) {
+            $scope.tutumServiceInfo = response.data;                
+        }, function errorCallback(response) {
+            console.log('Error:', response);
+        });
+        
+        $http({
+            method: 'GET',
+            url: 'https://dashboard.tutum.co//api/v1/stack/',
+             headers: {'Authorization': 'ApiKey djbnjack:97c5dae24f965291a3433efa99684113d2fee38f'}
+        }).then(function successCallback(response) {
+            $scope.tutumStackInfo = response.data;                
+        }, function errorCallback(response) {
+            console.log('Error:', response);
+        });
+        
+        $http({
+            method: 'GET',
+            url: 'https://dashboard.tutum.co//api/v1/node/',
+             headers: {'Authorization': 'ApiKey djbnjack:97c5dae24f965291a3433efa99684113d2fee38f'}
+        }).then(function successCallback(response) {
+            $scope.tutumNodeInfo = response.data;                
+        }, function errorCallback(response) {
+            console.log('Error:', response);
+        });    }
+    
+    // First info call
+    getTutumInfo();
+    
+    // Schedule it every 5 secs
+    setInterval(getTutumInfo, 5000);
     
     var updateProcesses = function() {
         $http({
