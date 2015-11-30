@@ -58,31 +58,68 @@
       </nav>
 
       <div id="dashboard" class="page-header">
-        <h1>Dashboard <small>including some lovely graphics</small></h1>
+        <h1>Dashboard <small>including lovely graphics</small></h1>
       </div>
 
       <div class="panel panel-default">
-        <div class="panel-heading">Tutum Stack Info</div>
+        <div class="panel-heading">Elastic-BPM Service Info</div>
         <div class="panel-body">
-          <pre  pretty-json="tutumStackInfo" />
+          
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#stack-info-formatted" aria-controls="home" role="tab" data-toggle="tab">Formatted</a></li>
+            <li role="presentation"><a href="#stacksjson" aria-controls="profile" role="tab" data-toggle="tab">StacksJSON</a></li>
+            <li role="presentation"><a href="#servicesjson" aria-controls="profile" role="tab" data-toggle="tab">ServicesJSON</a></li>
+            <li role="presentation"><a href="#nodesjson" aria-controls="profile" role="tab" data-toggle="tab">NodesJSON</a></li>
+          </ul>
+          
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="stack-info-formatted">
+              <h3>{{tutumStackInfo.meta.total_count}} Stacks</h3>
+              <div class="list-group" ng-repeat="stack in tutumStackInfo.objects">
+                <a href="#" class="list-group-item {{stack.state === 'Running' ? 'list-group-item-success' : 'list-group-item-danger'}}">
+                  <span class="badge">{{stack.services.length}} {{stack.services.length == 1 ? 'service' : 'services'}}</span>
+                  <h4 class="list-group-item-heading">{{stack.name}}</h4>
+                  <p class="list-group-item-text">State: {{stack.state}}</p>
+                </a>
+              </div>
+              
+              <h3>{{tutumServiceInfo.meta.total_count}} Services</h3>
+              <div class="list-group" ng-repeat="service in tutumServiceInfo.objects">
+                <a href="#" class="list-group-item {{service.state === 'Running' ? 'list-group-item-success' : 'list-group-item-danger'}}">
+                  <span class="badge">{{service.container_ports.length}} {{service.container_ports.length == 1 ? 'port' : 'ports'}} exposed</span>
+                  <h4 class="list-group-item-heading">{{service.name}}</h4>
+                  <p class="list-group-item-text">State: {{service.state}}</p>
+                </a>
+                <a ng-repeat="port in service.container_ports" data-ng-if="port.endpoint_uri" href="{{getUrl(port.endpoint_uri)}}">{{port.outer_port}}</a>
+              </div>
+              
+              <h3>{{tutumNodeInfo.meta.total_count}} {{tutumNodeInfo.meta.total_count == 1 ? 'Node' : 'Nodes'}}</h3>
+              <div class="list-group" ng-repeat="node in tutumNodeInfo.objects">
+                <a href="#" class="list-group-item {{node.state === 'Deployed' ? 'list-group-item-success' : 'list-group-item-danger'}}">
+                  <span class="badge">{{node.current_num_containers}} {{node.current_num_containers == 1 ? 'running container' : 'running containers'}}</span>
+                  <h4 class="list-group-item-heading">{{node.nickname}}</h4>
+                  <p class="list-group-item-text">State: {{node.state}}</p>
+                </a>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="stacksjson">
+              <pre pretty-json="tutumStackInfo" />
+            </div>
+            <div role="tabpanel" class="tab-pane" id="servicesjson">
+              <pre pretty-json="tutumServiceInfo" />
+            </div>
+            <div role="tabpanel" class="tab-pane" id="nodesjson">
+              <pre pretty-json="tutumNodeInfo" />
+            </div>
+          </div>
+          
         </div> <!-- /panel-body -->
       </div> <!-- /panel -->
 
-      <div class="panel panel-default">
-        <div class="panel-heading">Tutum Service Info</div>
-        <div class="panel-body">
-          <pre  pretty-json="tutumServiceInfo" />
-        </div> <!-- /panel-body -->
-      </div> <!-- /panel -->
-
-      <div class="panel panel-default">
-        <div class="panel-heading">Tutum Node Info</div>
-        <div class="panel-body">
-          <pre  pretty-json="tutumNodeInfo" />
-        </div> <!-- /panel-body -->
-      </div> <!-- /panel -->
       <div id="processes" class="page-header">
-        <h1>All about the processes <small>it's the P in BPM :-)</small></h1>
+        <h1>All about the processes <small>the P in BPM</small></h1>
       </div>
       
       <div class="panel panel-default">
@@ -156,7 +193,7 @@ Phasellus a risus non mauris aliquet vehicula. Fusce sit amet dolor id nulla pla
       </div> <!-- /panel -->
 
       <div id="future" class="page-header">
-        <h1>Future Work <small>a nice list of lovely things</small></h1>
+        <h1>Future Work <small>a list the future</small></h1>
       </div>
 
       <div class="panel panel-default">
@@ -171,7 +208,7 @@ Phasellus a risus non mauris aliquet vehicula. Fusce sit amet dolor id nulla pla
       </div> <!-- /panel -->
 
       <div id="contact" class="page-header">
-        <h1>Contact <small>standard contact form, directly to my spam box - kidding!</small></h1>
+        <h1>Contact <small>not going to my spam box</small></h1>
       </div>
 
       <div class="panel panel-default">

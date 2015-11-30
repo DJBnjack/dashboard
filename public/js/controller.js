@@ -16,6 +16,11 @@ $(function () {
             window.location.hash = hash;
         });
     });
+    
+    $('.nav-tabs a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    })
 });
 
 
@@ -157,6 +162,10 @@ processApp.controller('ProcessListCtrl', function ($scope, $http, socket) {
     var setUrl = function(url) {
         processes_api_url = url;
         updateProcesses();        
+    }
+    
+    $scope.getUrl = function(url) {
+        return url.replace("tcp://", "http://");
     }
 
     socket.on('url', setUrl);
