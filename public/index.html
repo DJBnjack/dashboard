@@ -162,7 +162,9 @@
       <div class="panel panel-default">
         <div class="panel-heading">Process: {{selectedProcess == undefined ? "None selected" : processes[selectedProcess].name}}</div>
         <div class="panel-body" ng-if="selectedProcess != undefined">
-          <p>{{processes[selectedProcess]}}</p>
+          <div>
+            <pre pretty-json="processes[selectedProcess]" />
+          </div>
           
           <div class="btn-group" role="group" aria-label="...">
             <button type="button" ng-show="processes[selectedProcess].state == 'new'" ng-click="updateProcess(processes[selectedProcess].guid)" class="btn btn-default">Finish</button>
