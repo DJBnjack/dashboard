@@ -23,7 +23,6 @@ $(function () {
     })
 });
 
-
 var processApp = angular.module('processApp', ['ngPrettyJson']);
 
 processApp.factory('socket', ['$rootScope', function ($rootScope) {
